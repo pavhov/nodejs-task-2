@@ -20,7 +20,7 @@ export default class MysqlDataSource extends CommonModule {
             username: Config.params["db_user"],
             password: Config.params["db_pass"],
             database: Config.params["db_name"],
-            logging: false,
+            logging: true,
         };
         this._connector = new Sequelize(this._options);
         if (MysqlDataSource._instance) {

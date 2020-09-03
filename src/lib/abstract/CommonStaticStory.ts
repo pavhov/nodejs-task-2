@@ -1,9 +1,10 @@
 import DataSource                              from "../../module/db/dialect/base/DataSource";
 import { InitOptions, Model, ModelAttributes } from "sequelize";
+import { ModelValidateOptions }                from "sequelize/types/lib/model";
 
 export default abstract class CommonStaticStory {
 
-    protected _model: Model | any;
+    protected _model: any | Model;
 
     protected _attributes: ModelAttributes<import("sequelize/types").Model<any, any>, any>;
     protected _options: InitOptions<import("sequelize/types").Model<any, any>>;

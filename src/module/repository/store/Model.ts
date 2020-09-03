@@ -7,18 +7,31 @@ export default class StoreModel extends Model {
         field: "id",
         allowNull: false,
         primaryKey: true,
+
+        validate: {
+            notEmpty: true,
+            isNumeric: false,
+        }
     };
 
     public static Title: ModelAttributeColumnOptions = {
         type: DataTypes.TEXT({length: "medium"}),
         field: "title",
         allowNull: false,
+
+        validate: {
+            notEmpty: true,
+        },
     };
 
     public static WatermarkImage: ModelAttributeColumnOptions = {
-        type: DataTypes.TEXT({length: "medium"}),
+        type: DataTypes.JSON,
         field: "watermark_image",
         allowNull: true,
+
+        validate: {
+            notEmpty: true,
+        }
     };
 
 

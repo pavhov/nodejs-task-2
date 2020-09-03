@@ -6,7 +6,7 @@ import Config      from "../system/Config";
 import { KoaApi }  from "../../lib/decorators/Koa";
 
 @ModuleInt
-@KoaApi({path: "/tesk2"})
+@KoaApi({path: "/task"})
 export default class Http extends CommonStory {
     private koa: Koa.DefaultContext;
     private readonly ip: string;

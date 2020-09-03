@@ -56,11 +56,12 @@ export function Presenter(options: { path: string | string[] }) {
     return function <T extends { new(...args: any[]): {} }>(constructor: T) {
         koa[key].router[constructor.name] = {path: options.path, route: new Router()};
         for (let name in constructor.prototype.routes) {
-            let route: { path: string; method: string; before: any; handler: any; after: any; } = (new constructor as any).routes[name];
+            let instance = (new constructor as any);
+            let route: { path: string; method: string; before: any; handler: any; after: any; } = instance.routes[name];
             koa[key].router[constructor.name].route[route.method](
                 route.path,
                 ...(MiddlewareHandler("before", route.before)),
-                route.handler,
+                route.handler.bind(instance),
                 ...(MiddlewareHandler("after", route.after)),
                 koa[key].router[constructor.name].route.allowedMethods()
             );
@@ -117,10 +118,10 @@ function Middleware(name: string, target: any, propertyName: string, handler: an
     }
     if (handler instanceof Array) {
         for (let rowI = 0; rowI < handler.length; rowI++) {
-            target.routes[propertyName][name].push(handler[rowI] || options.name);
+            target.routes[propertyName][name].unshift((handler[rowI] || options.name));
         }
     } else {
-        target.routes[propertyName][name].push(handler || options.name);
+        target.routes[propertyName][name].unshift((handler || options.name));
     }
 }
 
@@ -138,7 +139,6 @@ function MiddlewareHandler(useCase: string, routes: any[] = []): any[] {
     for (let rowI = 0; rowI < routes.length; rowI++) {
         let route = routes[rowI];
         let m = (new route as any);
-        console.log(m, useCase);
         result.push(m[useCase].bind(m));
     }
 

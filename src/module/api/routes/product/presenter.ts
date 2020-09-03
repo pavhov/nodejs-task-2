@@ -1,9 +1,10 @@
 import { Delete, Get, Post, Presenter } from "../../../../lib/decorators/Koa";
-import { ProductStory }                 from "./story";
-import { ImageStory }                   from "../image/story";
+
+import { ProductStory } from "./story";
+import { ImageStory }   from "../image/story";
 
 @Presenter({path: "/product"})
-export default class ActionsPresenter {
+export default class ProductPresenter {
     private stories: { [p: string]: any } = {};
 
     constructor() {

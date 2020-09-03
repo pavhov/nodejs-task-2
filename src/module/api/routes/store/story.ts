@@ -15,23 +15,18 @@ export class StoreStory extends CommonStory {
         };
     }
 
-    public async getOne(): Promise<any> {
-        const store = await this.getOne();
-        return Promise.resolve(store);
+    public getOne(conditions: any, fields: any): Promise<any> {
+        return this.tasks.store.getOne(conditions, fields);
     }
 
-    public async createOne(): Promise<any> {
-        const store = await this.getOne();
-        return Promise.resolve(store);
+    public storeOneWatermark(conditions: any, update: any): Promise<any> {
+        return this.tasks.store.storeWatermark(conditions, update);
     }
 
-    public async updateOne(): Promise<any> {
-        const store = await this.getOne();
-        return Promise.resolve(store);
+    public async removeOne(conditions: any, fields: any): Promise<any> {
+        const store = await this.getOne(conditions, fields);
+
+
     }
 
-    public async removeOne(): Promise<any> {
-        const store = await this.getOne();
-        return Promise.resolve(store);
-    }
 }
