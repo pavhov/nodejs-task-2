@@ -35,7 +35,7 @@ export default class Task extends CommonStaticStory {
 
 
     public getList(conditions: any, fields: any) {
-        return this._model.find({
+        return this._model.findAll({
             where: conditions,
             attributes: fields,
             raw: true,
@@ -44,4 +44,7 @@ export default class Task extends CommonStaticStory {
         });
     }
 
+    public storeStockImage(conditions: any, update: any): Promise<any> {
+        return this._model.update({Image: update}, {where: conditions});
+    }
 }

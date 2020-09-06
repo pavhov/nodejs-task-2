@@ -1,17 +1,20 @@
-import Module from "../interfaces/Module";
+import Module            from "../interfaces/Module";
+import CommonStaticStory from "./CommonStaticStory";
 
 export const modules: Array<any> = [];
 export const staticModules: Array<any> = [];
+export const jobModules: Array<any> = [];
 
 export default abstract class CommonModule implements Module {
     protected p: NodeJS.Process;
 
+    protected staticModules: Array<CommonStaticStory> = [];
+
     protected constructor() {
         this.p = process;
-        modules.push(this);
     }
 
-    async start(): Promise<void> {
+    async init(): Promise<void> {
         console.log(`Starting ${this.constructor.name} module`);
         this.p.on("exit", (code) => this.stop());
         return await this.context();

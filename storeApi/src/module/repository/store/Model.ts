@@ -28,10 +28,6 @@ export default class StoreModel extends Model {
         type: DataTypes.JSON,
         field: "watermark_image",
         allowNull: true,
-
-        validate: {
-            notEmpty: true,
-        }
     };
 
 

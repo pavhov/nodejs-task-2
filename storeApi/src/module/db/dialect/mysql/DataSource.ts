@@ -1,7 +1,6 @@
 import { Sequelize }        from "sequelize";
 import { Dialect, Options } from "sequelize/types/lib/sequelize";
 
-import ModuleInt    from "../../../../lib/decorators/ModuleInt";
 import CommonModule from "../../../../lib/abstract/CommonModule";
 import Config       from "../../../system/Config";
 

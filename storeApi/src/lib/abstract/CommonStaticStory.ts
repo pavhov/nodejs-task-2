@@ -16,4 +16,9 @@ export default abstract class CommonStaticStory {
         };
         this._model.init(this._attributes, this._options);
     }
+
+    get model(): any {
+        return this._model;
+    }
+
 }

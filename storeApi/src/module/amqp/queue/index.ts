@@ -1,1 +1,2 @@
-import "./ProductWatermarkQueue";
+import "./store";
+import "./product";

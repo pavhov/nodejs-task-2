@@ -1,6 +1,6 @@
-import CommonModule    from "../../../../lib/abstract/CommonModule";
-import ModuleInt       from "../../../../lib/decorators/ModuleInt";
-import MysqlDataSource from "../mysql/DataSource";
+import CommonModule, { staticModules } from "../../../../lib/abstract/CommonModule";
+import MysqlDataSource                 from "../mysql/DataSource";
+import ModuleInt                       from "../../../../lib/decorators/ModuleInt";
 
 @ModuleInt
 export default class DataSource extends CommonModule {
@@ -12,6 +12,7 @@ export default class DataSource extends CommonModule {
         super();
 
         this._default = new MysqlDataSource();
+        this.staticModules = staticModules;
 
         if (!DataSource._instance) {
             DataSource._instance = this;
@@ -19,7 +20,8 @@ export default class DataSource extends CommonModule {
     }
 
     protected async context(): Promise<void> {
-        await this._default.start();
+        await Promise.all(this.staticModules.map(async (value: any) => value.Instance().init()));
+        await this._default.init();
         return Promise.resolve(undefined);
     }
 

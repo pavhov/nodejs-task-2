@@ -35,4 +35,9 @@ export default class Task extends CommonStaticStory {
     public storeWatermark(conditions: any, update: any): Promise<any> {
         return this._model.update({WatermarkImage: update}, {where: conditions});
     }
+
+    static set instance(value: Task) {
+        this._instance = value;
+    }
+
 }

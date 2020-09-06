@@ -37,22 +37,13 @@ export default class Amqp1 extends CommonStory {
         this._senderConnection = rhea.connect(_senderOptions);
         this._receiverConnection = rhea.connect(_receiverOptions);
 
-        this._sender = this._senderConnection.open_sender({
-            target: {
-                address: "/store/changes",
-                durable: 2,
-            },
-            autosettle: false
-        });
-        this._receiver = this._receiverConnection.open_receiver({
-            source: {
-                address: "/store/changes",
-                durable: 2,
-            },
-            autoaccept: false,
-            autosettle: false
-        });
+    }
 
+    public async setup(senderOptions: rhea.SenderOptions, receiverOptions: rhea.ReceiverOptions) {
+        const sender = this._senderConnection.open_sender(senderOptions);
+        const receiver = this._receiverConnection.open_receiver(receiverOptions);
+
+        return {sender, receiver};
     }
 
     protected async destroy(): Promise<void> {
@@ -74,6 +65,7 @@ export default class Amqp1 extends CommonStory {
     set receiver(value: rhea.Receiver) {
         this._receiver = value;
     }
+
     get sender(): rhea.Sender {
         return this._sender;
     }

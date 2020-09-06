@@ -1,2 +1,2 @@
 import "./amqp1";
-import "./queue/product";
+import "./queue";

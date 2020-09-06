@@ -4,11 +4,11 @@ import ModuleInt   from "../../../../lib/decorators/ModuleInt";
 import CommonStory from "../../../../lib/abstract/CommonModule";
 import Amqp1       from "../../amqp1";
 
-import StoreWatermarkStory from "./ProductWatermarkStory";
+import StoreWatermarkStory from "./StoreWatermarkStory";
 
 @ModuleInt
-export default class ProductWatermarkQueue extends CommonStory {
-    private static _instance: ProductWatermarkQueue;
+export default class StoreWatermarkQueue extends CommonStory {
+    private static _instance: StoreWatermarkQueue;
 
     private _senderContext: rhea.EventContext;
     private _receiverContext: rhea.EventContext;
@@ -16,30 +16,30 @@ export default class ProductWatermarkQueue extends CommonStory {
     constructor() {
         super();
 
-        if (ProductWatermarkQueue.instance) {
+        if (StoreWatermarkQueue.instance) {
             throw Error("ProductWatermark already initialized");
         }
-        ProductWatermarkQueue.instance = this;
+        StoreWatermarkQueue.instance = this;
     }
 
     protected async context(): Promise<void> {
         const {sender, receiver} = await Amqp1.instance.setup({
             target: {
-                address: "/product/changes",
+                address: "/store/changes",
                 durable: 2,
             },
             source: {
-                address: "/product/changes",
+                address: "/store/changes",
                 durable: 2,
             },
             autosettle: false
         }, {
             target: {
-                address: "/product/changes",
+                address: "/store/changes",
                 durable: 2,
             },
             source: {
-                address: "/product/changes",
+                address: "/store/changes",
                 durable: 2,
             },
             autoaccept: false,
@@ -74,11 +74,11 @@ export default class ProductWatermarkQueue extends CommonStory {
         }
     }
 
-    static get instance(): ProductWatermarkQueue {
+    static get instance(): StoreWatermarkQueue {
         return this._instance;
     }
 
-    static set instance(value: ProductWatermarkQueue) {
+    static set instance(value: StoreWatermarkQueue) {
         this._instance = value;
     }
 

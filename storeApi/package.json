@@ -2,8 +2,11 @@
   "name": "store-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "out/Main.js",
   "scripts": {
+    "beforeStart": "npm i && npm run build",
+    "start": "npm run beforeStart && node out/Main.js",
+    "dev": "node out/Main.js",
     "build": "tsc --project tsconfig.json",
     "watch": "tsc --watch --project tsconfig.json",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,6 +30,7 @@
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^9.4.0",
+    "koa-send": "^5.0.1",
     "mysql2": "^2.1.0",
     "rhea": "^1.0.24",
     "sequelize": "^6.3.5"
@@ -39,5 +43,8 @@
     "@types/koa-router": "^7.4.1",
     "@types/node": "^14.6.3",
     "@types/sequelize": "^4.28.9"
+  },
+  "devDependencies": {
+    "typescript": "^4.0.2"
   }
 }

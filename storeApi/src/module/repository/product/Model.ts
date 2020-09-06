@@ -23,7 +23,7 @@ export default class Model extends BaseModel<IProduct> {
     };
 
     public static Image: ModelAttributeColumnOptions = {
-        type: DataTypes.TEXT({length: "medium"}),
+        type: DataTypes.JSON,
         field: "image",
         allowNull: true,
     };
@@ -33,6 +33,7 @@ export default class Model extends BaseModel<IProduct> {
         Id: Model.Id,
         StoreId: Model.StoreId,
         Title: Model.Title,
+        Image: Model.Image,
     };
 
 }

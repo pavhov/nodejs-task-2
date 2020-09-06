@@ -1,0 +1,20 @@
+{
+  "store": [
+    {
+      "Id": 1,
+      "Title": "test 1"
+    }
+  ],
+  "product": [
+    {
+      "Id": 1,
+      "StoreId": 1,
+      "Title": "test 1"
+    },
+    {
+      "Id": 2,
+      "StoreId": 1,
+      "Title": "test 2"
+    }
+  ]
+}
